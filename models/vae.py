@@ -165,8 +165,6 @@ class VAE(Model):
             "kl_loss": kl_loss,
             "vae_loss": vae_loss,
             "predictor_loss": predictor_loss,
-            "max_recon_value": tf.reduce_max(reconstructed),
-            "min_recon_value": tf.reduce_min(reconstructed),
         }
 
     @tf.function
