@@ -24,13 +24,13 @@ def normalize_image(image):
 
 def prepare_dataset(dataset_path, properties_file, batch_size=32):
     properties_data = pd.read_csv(properties_file)
-    n_F_Values = properties_data["n_F"]
-    n_F_dataset = np.array([n_F_Values[i] for i in range(len(n_F_Values))])
+    Values = properties_data
+    values_dataset = np.array([Values[i] for i in range(len(Values))])
     
     file_names = sorted(os.listdir(dataset_path), key=lambda x: int(x.split(".")[0]))
     files_path = [os.path.join(dataset_path, file_name) for file_name in file_names]
     
-    dataset = tf.data.Dataset.from_tensor_slices((files_path, n_F_dataset))
+    dataset = tf.data.Dataset.from_tensor_slices((files_path, values_dataset))
     dataset = dataset.map(preprocess_dataset)
     dataset = dataset.map(add_channel)
     
